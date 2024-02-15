@@ -6,6 +6,7 @@ async function getAllStates(req, res) {
     const states = await State.findAll({
       attributes: ['state_master.*'],
       where: Sequelize.literal('id IN (SELECT MIN(id) FROM state_master GROUP BY state_name)'),
+      order: [['state_name', 'ASC']],
       raw: true
     });
 

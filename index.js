@@ -1,32 +1,47 @@
+
+
+
+const cors = require('cors');
 require('dotenv').config();
 const express = require('express');
+// Initialize express app
 const app = express();
-const cors = require('cors');
-
-
-
 app.use(cors());
+const http = require('http');
+const sequelize = require('./dbconfig');
 const stateRoutes = require('./routes/stateRoutes');
 const yearRoutes = require('./routes/yearRoutes');
 const districtRoute = require('./routes/districtRoute');
-const sequelize = require('./dbconfig');
-app.use(express.json())
 
 
-const PORT = process.env.PORT || 3000;
 
-// routes
+// Middleware
+app.use(express.json());
+
+// Define API routes
 app.use('/api', stateRoutes);
 app.use('/api', yearRoutes);
 app.use('/api', districtRoute);
 
-sequelize.authenticate()
-  .then(() => {
+// Set port
+const PORT = process.env.PORT || 3000;
+
+// Function to start the server
+const startServer = async () => {
+  try {
+    // Authenticate with the database
+    await sequelize.authenticate();
     console.log('Connected to the database.');
-    app.listen(PORT, () => {
+
+    // Start the server
+    const server = http.createServer(app);
+    server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+
+// Start the server
+startServer();

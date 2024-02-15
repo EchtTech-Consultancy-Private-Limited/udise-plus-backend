@@ -19,6 +19,7 @@ const yearsData = sequelize.define('yearsData', {
 }, {
   // Define additional model options here
   tableName: 'year_master', 
+  timestamps:false,
 });
 
 module.exports = yearsData;

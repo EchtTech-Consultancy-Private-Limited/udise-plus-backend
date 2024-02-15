@@ -1,7 +1,10 @@
 const { Sequelize } = require('sequelize');
 const State = require('../models/stateModel');
+const ApiResponse = require('../utils/ApiResponse')
+const ApiError = require('../utils/ApiError')
+const asyncHandler = require('../utils/asyncHandler')
 
-async function getAllStates(req, res) {
+const getAllStates = asyncHandler(async(req, res)=> {
   try {
     const states = await State.findAll({
       attributes: ['state_master.*'],
@@ -10,12 +13,15 @@ async function getAllStates(req, res) {
       raw: true
     });
 
-    res.json(states);
+    return res.status(200).json(
+      new ApiResponse(200, states, "fetch all states successfully.")
+  ) 
   } catch (error) {
-    console.error('Error fetching states:', error.message);
-    res.status(500).json({ error: 'Internal server error' });
+    throw new ApiError(400, "Something went wrong!")
   }
 }
+
+)
 
 
 

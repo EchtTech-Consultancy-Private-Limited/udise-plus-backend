@@ -1,16 +1,20 @@
 
 const Districts = require('../models/districtModel');
+const ApiResponse = require('../utils/ApiResponse')
+const ApiError = require('../utils/ApiError')
+const asyncHandler = require('../utils/asyncHandler')
 
 
-async function getAllDistricts(req, res) {
-    try {
-      const districts = await Districts.findAll();
-      res.json(districts);
-    } catch (error) {
-      console.error('Error fetching districts:', error.message);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-}
+const getAllDistricts = asyncHandler(async(req, res) => {
+  try {
+    const districts = await Districts.findAll();
+    return res.status(200).json(
+      new ApiResponse(200, districts, "fetch all district successfully.")
+  )    } catch (error) {
+    throw new ApiError(400, "Something went wrong!")
+    
+  }
+});
 
 module.exports = {
     getAllDistricts,

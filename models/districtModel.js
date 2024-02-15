@@ -2,36 +2,40 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../dbconfig');
 
-const State = sequelize.define('state_master', {
+const Districts = sequelize.define('district_master', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
+  district_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  udise_district_code: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  udise_state_code: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   state_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER, 
     allowNull: false
   },
-  state_code: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  state_name: {
+  district_name: {
     type: DataTypes.STRING,
     allowNull: false
   },
   inityear: {
-    type: DataTypes.STRING, // Assuming it's stored as a string for simplicity
-    allowNull: false
-  },
-  year_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   }
 }, {
   // Define additional model options here
-  tableName: 'state_master', // Specify the actual table name
-  timestamps: false // Disable timestamps (createdAt, updatedAt)
+  tableName: 'district_master', 
+  timestamps:false
 });
 
-module.exports = State;
+module.exports = Districts;

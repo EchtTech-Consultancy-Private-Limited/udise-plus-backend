@@ -1,5 +1,4 @@
-const dotenv = require('dotenv').config();
-const http = require('http');
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const stateRoutes = require('./routes/stateRoutes');

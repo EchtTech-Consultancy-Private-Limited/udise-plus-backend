@@ -1,41 +1,15 @@
+const client = require('../db/dbconfig')
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../dbconfig');
 
-const Districts = sequelize.define('district_master', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  district_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  udise_district_code: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  udise_state_code: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  state_id: {
-    type: DataTypes.INTEGER, 
-    allowNull: false
-  },
-  district_name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  inityear: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {
-  // Define additional model options here
-  tableName: 'district_master', 
-  timestamps:false
-});
+class DistrictDataModel {
+    tableName = 'district_master';
 
-module.exports = Districts;
+    findAll = async (id) => {
+      
+        const sql = `SELECT * FROM ${this.tableName}`;
+        const result = await client.query(sql);
+        return result.rows;
+    }
+}
+
+module.exports = new DistrictDataModel;

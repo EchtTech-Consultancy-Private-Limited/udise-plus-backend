@@ -25,6 +25,29 @@ const getAllDistricts = asyncHandler(async(req, res) => {
   }
 });
 
+const getDistrictById = asyncHandler(async(req, res) => {
+  try {
+    const state_id = req.params.id;
+    const getDistrict = await DistrictDataModel.findById(state_id);
+    if(getDistrict){
+      return res.status(200).json(
+        new ApiResponse(200, getDistrict, "Get district successfully.")
+    )   
+  
+    }else{
+      return res.status(200).json(
+        new ApiResponse(404, getDistrict, "Not found any district")
+    )   
+  
+    }
+
+} catch (error) {
+    throw new ApiError(400, "Something went wrong!")
+    
+  }
+});
+
 module.exports = {
     getAllDistricts,
+    getDistrictById
 };

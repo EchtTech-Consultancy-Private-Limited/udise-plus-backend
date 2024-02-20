@@ -4,6 +4,18 @@ const ApiError = require('../utils/ApiError')
 const asyncHandler = require('../utils/asyncHandler')
 const DistrictDataModel = require('../models/districtModel');
 
+const test = asyncHandler(async(req, res) => {
+  try {
+    return res.status(200).json(
+      new ApiResponse(200, "Districts", "Fetch all district successfully.")
+  )   
+
+
+} catch (error) {
+    throw new ApiError(400, "Something went wrong!")
+    
+  }
+});
 const getAllDistricts = asyncHandler(async(req, res) => {
   try {
     const districts = await DistrictDataModel.findAll();
@@ -48,5 +60,6 @@ const getDistrictById = asyncHandler(async(req, res) => {
 
 module.exports = {
     getAllDistricts,
-    getDistrictById
+    getDistrictById,
+    test
 };

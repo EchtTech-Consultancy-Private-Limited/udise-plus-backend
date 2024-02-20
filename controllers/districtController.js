@@ -33,7 +33,6 @@ const getDistrictById = asyncHandler(async(req, res) => {
       return res.status(200).json(
         new ApiResponse(200, getDistrict, "Get district successfully.")
     )   
-  
     }else{
       return res.status(200).json(
         new ApiResponse(404, getDistrict, "Not found any district")

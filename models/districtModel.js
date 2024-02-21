@@ -13,7 +13,7 @@ class DistrictDataModel {
 
     findById = async (state_id) => {
       
-        const sql = `SELECT * FROM ${this.tableName} where state_id = ${state_id}`;
+        const sql = `SELECT * FROM ${this.tableName} where state_id = ${state_id} AND inityear = '2019-20'`;
         const result = await client.query(sql);
         return result.rows;
     }

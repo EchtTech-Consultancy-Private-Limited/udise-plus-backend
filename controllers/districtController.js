@@ -9,11 +9,8 @@ const test = asyncHandler(async(req, res) => {
     return res.status(200).json(
       new ApiResponse(200, "Districts", "Fetch all district successfully.")
   )   
-
-
 } catch (error) {
     throw new ApiError(400, "Something went wrong!")
-    
   }
 });
 const getAllDistricts = asyncHandler(async(req, res) => {
@@ -41,7 +38,7 @@ const getDistrictById = asyncHandler(async(req, res) => {
   try {
     const state_id = req.params.id;
     const getDistrict = await DistrictDataModel.findById(state_id);
-    if(getDistrict){
+    if(getDistrict.length>0){
       return res.status(200).json(
         new ApiResponse(200, getDistrict, "Get district successfully.")
     )   

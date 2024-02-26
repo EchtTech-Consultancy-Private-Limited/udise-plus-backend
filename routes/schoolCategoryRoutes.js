@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {test,getAllSchoolCategory} = require('../controllers/schoolCategoryController');
+const {getAllSchoolCategory,getSchoolCategoryNameByCode} = require('../controllers/schoolCategoryController');
 
-router.get('/test', test);
 router.get('/get-all', getAllSchoolCategory);
+router.get('/get-name-by-code', getSchoolCategoryNameByCode);
 
 
 module.exports = router;

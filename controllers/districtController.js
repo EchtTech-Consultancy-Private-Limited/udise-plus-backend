@@ -10,8 +10,7 @@ const test = asyncHandler(async(req, res) => {
       new ApiResponse(200, "Districts", "Fetch all district successfully.")
   )   
 } catch (error) {
-    throw new ApiError(400, "Something went wrong!")
-  }
+  res.status(500).send({status:false,message:new ApiError(400, "Something went wrong!",[{error:error.message}])});   }
 });
 const getAllDistricts = asyncHandler(async(req, res) => {
   try {
@@ -29,7 +28,7 @@ const getAllDistricts = asyncHandler(async(req, res) => {
     }
 
 } catch (error) {
-    throw new ApiError(400, "Something went wrong!")
+  res.status(500).send({status:false,message:new ApiError(400, "Something went wrong!",[{error:error.message}])}); 
     
   }
 });

@@ -11,8 +11,7 @@ const test = asyncHandler(async(req, res)=> {
   ) 
     
   } catch (error) {
-    throw new ApiError(400, "Something went wrong!")
-  }
+    res.status(500).send({status:false,message:new ApiError(400, "Something went wrong!",[{error:error.message}])});   }
 }
 
 )
@@ -30,8 +29,7 @@ const getAllSchoolManagement = asyncHandler(async(req, res)=> {
     }
     
   } catch (error) {
-    throw new ApiError(400, "Something went wrong!")
-  }
+    res.status(500).send({status:false,message:new ApiError(400, "Something went wrong!",[{error:error.message}])});   }
 }
 
 )
